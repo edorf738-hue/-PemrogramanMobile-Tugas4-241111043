@@ -7,35 +7,31 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.content.Intent
 
-class EventListActivity : AppCompatActivity() {
+class ProductListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_event_list)
+        setContentView(R.layout.activity_product_list)
 
-        val rvEvents = findViewById<RecyclerView>(R.id.rvEvents)
+        val rvProducts = findViewById<RecyclerView>(R.id.rvProducts)
 
-        rvEvents.layoutManager = LinearLayoutManager(this)
+        rvProducts.layoutManager = LinearLayoutManager(this)
 
-        val eventList = listOf(
-            Event(1, "Seminar AI & Masa Depan", "15 Mei 2026", "Hotel Grand Slipi", 50000),
-            Event(2, "Workshop Kotlin Android", "20 Mei 2026", "Kampus Teknik", 75000),
-            Event(3, "Web Developer Gathering", "25 Mei 2026", "Co-working Space", 0),
-            Event(4, "UI/UX Design Bootcamp", "1 Juni 2026", "Online (Zoom)", 100000),
-            Event(5, "Tech Career Fair 2026", "10 Juni 2026", "Convention Center", 0)
+        val productList = listOf(
+            Product(1, "Nike Air Max 90", "Sepatu · Ukuran 42", 1500000, R.drawable.img_produk1),
+            Product(2, "Kaos Polos Hitam", "Baju · Size L", 89000, R.drawable.img_produk2),
+            Product(3, "Headphone Bluetooth", "Elektronik · Wireless", 350000, R.drawable.img_produk3),
+            Product(4, "Tas Ransel", "Aksesoris · 25L", 275000, R.drawable.img_produk4),
+            Product(5, "Sticker Pack", "Aksesoris", 0, R.drawable.img_produk1)
         )
 
-        val adapter = EventAdapter(eventList)
-
-        rvEvents.adapter = adapter
+        rvProducts.adapter = ProductAdapter(productList)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        bottomNav.selectedItemId = R.id.nav_event
+        bottomNav.selectedItemId = R.id.nav_product
 
         bottomNav.setOnItemSelectedListener { item ->
-
             when (item.itemId) {
-
                 R.id.nav_home -> {
                     val username = intent.getStringExtra("username")
                     val intent = Intent(this, MainActivity::class.java)
@@ -43,11 +39,7 @@ class EventListActivity : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
-
-                R.id.nav_event -> {
-                    true
-                }
-
+                R.id.nav_product -> true
                 else -> false
             }
         }
